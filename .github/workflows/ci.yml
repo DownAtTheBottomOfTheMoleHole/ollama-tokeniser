@@ -10,6 +10,31 @@ permissions:
   contents: read
 
 jobs:
+  policy:
+    name: Version and commit policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository history
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Validate conventional commits
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/check_conventional_commits.py --base "$BASE_SHA" --head "$HEAD_SHA"
+
+      - name: Set up GitVersion
+        uses: gittools/actions/gitversion/setup@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
+        with:
+          versionSpec: "6.8.2"
+
+      - name: Calculate GitVersion
+        uses: gittools/actions/gitversion/execute@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
+        with:
+          useConfigFile: true
+
   test:
     name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest

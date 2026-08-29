@@ -16,20 +16,23 @@ and forwards the fitted request to a locally running Ollama server.
 
 ## Table of contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Security and privacy](#security-and-privacy)
-- [Getting started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [VS Code Chat](#vs-code-chat)
-- [Configuration](#configuration)
-- [Python API](#python-api)
-- [Command-line usage](#command-line-usage)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [Limitations](#limitations)
-- [Licence](#licence)
+- [Ollama Tokeniser](#ollama-tokeniser)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Architecture](#architecture)
+  - [Security and privacy](#security-and-privacy)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [VS Code Chat](#vs-code-chat)
+  - [Configuration](#configuration)
+  - [Python API](#python-api)
+  - [Command-line usage](#command-line-usage)
+  - [Testing](#testing)
+  - [Contributing](#contributing)
+  - [Releases](#releases)
+  - [Limitations](#limitations)
+  - [Licence](#licence)
 
 ## Overview
 
@@ -220,12 +223,23 @@ or network access.
 
 ## Contributing
 
-Contributions are welcome. Follow the organisation's
-[contribution guidance][contributing-link], keep changes focused, use Conventional
-Commits, and include tests for behavioural changes.
+Contributions are welcome. Follow the repository's [contribution
+guidance](CONTRIBUTING.md), keep changes focused, use Conventional Commits, and
+include tests for behavioural changes.
 
 Repository-specific Copilot guidance is available in
 `.github/copilot-instructions.md`, `.github/instructions/`, and `.github/agents/`.
+
+## Releases
+
+GitHub Flow keeps `main` releasable. GitVersion 6 calculates semantic versions
+from Conventional Commits, and releases use `vMAJOR.MINOR.PATCH` tags. A tag
+triggers tests, reproducible Python package builds, build-provenance attestation,
+and a GitHub Release containing the wheel and source distribution.
+
+PyPI Trusted Publishing is included but remains disabled until a maintainer
+configures the repository's `pypi` environment and `PUBLISH_TO_PYPI` variable.
+The workflow does not use a stored PyPI API token.
 
 ## Limitations
 
@@ -243,9 +257,8 @@ Released under the [MIT Licence](LICENSE).
 
 [ci-badge]: https://github.com/DownAtTheBottomOfTheMoleHole/ollama-tokeniser/actions/workflows/ci.yml/badge.svg
 [ci-link]: https://github.com/DownAtTheBottomOfTheMoleHole/ollama-tokeniser/actions/workflows/ci.yml
-[contributing-link]: https://github.com/DownAtTheBottomOfTheMoleHole/.github/blob/main/CONTRIBUTING.md
 [licence-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [licence-link]: LICENSE
-[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/datbmh_banner_v7a_base.png
+[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/datbmh_banner_v13.png
 [python-badge]: https://img.shields.io/badge/python-%3E%3D3.10-3776AB
 [python-link]: https://www.python.org/
