@@ -54,12 +54,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base", help="Exclusive base commit; omitted for all reachable commits")
     parser.add_argument("--head", default="HEAD", help="Inclusive head commit")
+    parser.add_argument("--subject", help="Validate one pull request or commit subject")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    subjects = commit_subjects(args.base, args.head)
+    if args.subject:
+        subjects = [("pull request", args.subject)]
+    else:
+        subjects = commit_subjects(args.base, args.head)
     invalid = invalid_subjects(subjects)
     if invalid:
         print("Commit subjects must use Conventional Commits and be at most 72 characters:")
