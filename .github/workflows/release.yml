@@ -32,7 +32,7 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
         with:
-          useConfigFile: true
+          configFilePath: GitVersion.yml
 
       - name: Verify release tag
         env:
@@ -101,4 +101,3 @@ jobs:
 
       - name: Publish distributions
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.13.0
-

@@ -33,7 +33,7 @@ jobs:
       - name: Calculate GitVersion
         uses: gittools/actions/gitversion/execute@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
         with:
-          useConfigFile: true
+          configFilePath: GitVersion.yml
 
   test:
     name: Python ${{ matrix.python-version }}
