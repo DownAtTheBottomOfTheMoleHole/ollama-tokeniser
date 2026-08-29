@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start tokenizing Ollama proxy",
+      "type": "process",
+      "command": "uv",
+      "args": [
+        "run",
+        "--offline",
+        "ollama-tokeniser-proxy",
+        "--config",
+        "${workspaceFolder}/tokenizers.json"
+      ],
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen",
+        "instanceLimit": 1
+      },
+      "problemMatcher": {
+        "owner": "ollama-tokeniser",
+        "pattern": {
+          "regexp": "^(.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "listening on",
+          "endsPattern": "listening on"
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": false
+      }
+    }
+  ]
+}

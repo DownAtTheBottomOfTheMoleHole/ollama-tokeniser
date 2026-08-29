@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ollama-tokeniser"
+version = "0.1.0"
+description = "Token-aware prompt truncation for Ollama"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Carl Dawson" }]
+dependencies = [
+  "jinja2>=3.1,<4",
+  "ollama>=0.4,<1",
+  "transformers>=4.45,<6",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8,<10",
+  "ruff>=0.14,<1",
+]
+
+[project.scripts]
+ollama-tokeniser = "ollama_tokeniser.cli:main"
+ollama-tokeniser-proxy = "ollama_tokeniser.proxy:main"
+ollama-tokeniser-cache = "ollama_tokeniser.proxy:cache_main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ollama_tokeniser"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "RUF", "UP"]

@@ -1,0 +1,10 @@
+{
+  "model_tokenizers": {
+    "qwen2.5-coder:1.5b": "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+  },
+  "context_size": 32768,
+  "reserve_tokens": 4096,
+  "template_tokens": 128,
+  "strategy": "tail",
+  "local_files_only": true
+}

@@ -1,0 +1,6 @@
+{
+  "ollama.endpoint": "http://127.0.0.1:11435",
+  "chat.byokUtilityModelDefault": "mainAgent",
+  "chat.sessionSync.enabled": false,
+  "chat.agentHost.byokModels.enabled": true
+}
