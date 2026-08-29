@@ -78,8 +78,37 @@ jobs:
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_NOTES: |
+            ## Installation
+
+            Download the attached wheel or install it directly:
+
+            ```bash
+            python -m pip install "https://github.com/DownAtTheBottomOfTheMoleHole/ollama-tokeniser/releases/download/${{ github.ref_name }}/ollama_tokeniser-${{ steps.gitversion.outputs.semVer }}-py3-none-any.whl"
+            ```
+
+            The initial dependency and tokenizer downloads require internet access. Token counting,
+            prompt fitting, proxying, and Ollama inference then run locally without GitHub or Copilot
+            model-request tokens.
+
+            ## Release artefacts
+
+            This release contains a Python wheel and source distribution with GitHub build-provenance
+            attestations. Verify a downloaded artefact with:
+
+            ```bash
+            gh attestation verify <artefact> --repo DownAtTheBottomOfTheMoleHole/ollama-tokeniser
+            ```
+
+            ## Changes
           TAG_NAME: ${{ github.ref_name }}
-        run: gh release create "$TAG_NAME" dist/* --generate-notes --verify-tag
+        run: >-
+          gh release create "$TAG_NAME" dist/*
+          --title "$TAG_NAME"
+          --generate-notes
+          --notes "$RELEASE_NOTES"
+          --verify-tag
+          --fail-on-no-commits
 
   publish-pypi:
     name: Publish to PyPI with Trusted Publishing
