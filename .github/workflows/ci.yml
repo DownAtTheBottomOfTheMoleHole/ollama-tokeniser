@@ -19,10 +19,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate conventional commits
+      - name: Validate pull request title
+        if: ${{ github.event_name == 'pull_request' }}
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: python scripts/check_conventional_commits.py --subject "$PR_TITLE"
+
+      - name: Validate pushed commits
+        if: ${{ github.event_name == 'push' }}
+        env:
+          BASE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
         run: python scripts/check_conventional_commits.py --base "$BASE_SHA" --head "$HEAD_SHA"
 
       - name: Set up GitVersion
