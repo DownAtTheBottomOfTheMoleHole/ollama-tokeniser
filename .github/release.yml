@@ -1,0 +1,57 @@
+changelog:
+  exclude:
+    labels:
+      - Ignore for Release
+
+  categories:
+    - title: "💥 Breaking changes"
+      labels:
+        - Semver Major
+
+    - title: "✨ Features and enhancements"
+      labels:
+        - Enhancement
+        - Semver Minor
+
+    - title: "🐛 Bug fixes and hotfixes"
+      labels:
+        - Bug
+        - Hotfix
+        - Semver Patch
+
+    - title: "📝 Documentation"
+      labels:
+        - Documentation
+        - Documentation Required
+
+    - title: "🧪 Testing"
+      labels:
+        - Feature Testing
+        - Integration Testing
+        - Missing Tests
+
+    - title: "📦 Dependencies"
+      labels:
+        - dependencies
+        - Renovate
+
+    - title: "🤖 Automation"
+      labels:
+        - Azure Pipelines
+        - Bot
+        - GitHub Actions
+        - github_actions
+        - MegaLinter
+
+    - title: "🧰 Maintenance and repository"
+      labels:
+        - Chore
+        - DBMH GitHub
+        - Refactor
+        - Repository
+        - Style
+
+    - title: "📋 Other changes"
+      labels:
+        - "*"
+
