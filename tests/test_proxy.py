@@ -18,11 +18,21 @@ def test_proxy_config_loads_model_mapping(tmp_path):
     assert config.local_files_only is True
 
 
+def test_proxy_config_loads_builtin_catalogue(tmp_path):
+    path = tmp_path / "tokenizers.json"
+    path.write_text(json.dumps({"catalogue": "builtin"}))
+
+    config = ProxyConfig.from_file(path)
+
+    assert config.model_tokenizers["qwen2.5-coder"] == "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    assert "llava" in config.unsupported_models
+
+
 def test_proxy_config_requires_mapping(tmp_path):
     path = tmp_path / "tokenizers.json"
-    path.write_text("{}")
+    path.write_text('{"model_tokenizers": {}}')
 
-    with pytest.raises(ValueError, match="model_tokenizers"):
+    with pytest.raises(ValueError, match="enable a catalogue"):
         ProxyConfig.from_file(path)
 
 
@@ -32,6 +42,14 @@ def test_tag_filter_hides_models_without_tokenizer_mapping():
     filtered = json.loads(filter_tag_payload(body, {"safe:latest": "org/safe"}))
 
     assert filtered == {"models": [{"name": "safe:latest"}]}
+
+
+def test_tag_filter_accepts_catalogue_family_for_any_tag():
+    body = json.dumps({"models": [{"name": "qwen2.5-coder:32b"}]}).encode()
+
+    filtered = json.loads(filter_tag_payload(body, {"qwen2.5-coder": "org/tokenizer"}))
+
+    assert filtered == {"models": [{"name": "qwen2.5-coder:32b"}]}
 
 
 @pytest.mark.parametrize(

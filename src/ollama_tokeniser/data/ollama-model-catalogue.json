@@ -1,0 +1,963 @@
+{
+  "generated_at": "2026-08-29",
+  "models": {
+    "alfred": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "all-minilm": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "athene-v2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "aya": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "aya-expanse": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "bakllava": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "bespoke-minicheck": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "bge-large": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "bge-m3": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "codebooga": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "codegeex4": {
+      "status": "mapped",
+      "tokenizer": "THUDM/codegeex4-all-9b"
+    },
+    "codegemma": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "codellama": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "codeqwen": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "codestral": {
+      "status": "mapped",
+      "tokenizer": "mistralai/Codestral-22B-v0.1"
+    },
+    "codeup": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "cogito": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "cogito-2.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "command-a": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "command-r": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "command-r-plus": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "command-r7b": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "command-r7b-arabic": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dbrx": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepcoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepscaler": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepseek-coder": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/deepseek-coder-6.7b-instruct"
+    },
+    "deepseek-coder-v2": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
+    },
+    "deepseek-llm": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/deepseek-llm-7b-chat"
+    },
+    "deepseek-ocr": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepseek-r1": {
+      "reason": "tags use different Qwen, Llama, and DeepSeek tokenizer families",
+      "status": "unsupported"
+    },
+    "deepseek-v2": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/DeepSeek-V2-Lite-Chat"
+    },
+    "deepseek-v2.5": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/DeepSeek-V2.5"
+    },
+    "deepseek-v3": {
+      "status": "mapped",
+      "tokenizer": "deepseek-ai/DeepSeek-V3"
+    },
+    "deepseek-v3.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepseek-v4-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "deepseek-v4-pro": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "devstral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "devstral-2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "devstral-small-2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphin-llama3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphin-mistral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphin-mixtral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphin-phi": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphin3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "dolphincoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "duckdb-nsql": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "embeddinggemma": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "everythinglm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "exaone-deep": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "exaone3.5": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "falcon": {
+      "status": "mapped",
+      "tokenizer": "tiiuae/falcon-7b-instruct"
+    },
+    "falcon2": {
+      "status": "mapped",
+      "tokenizer": "tiiuae/falcon-11B"
+    },
+    "falcon3": {
+      "status": "mapped",
+      "tokenizer": "tiiuae/Falcon3-7B-Instruct"
+    },
+    "firefunction-v2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "functiongemma": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gemma": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gemma2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gemma3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gemma3n": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gemma4": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-4.7-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-5.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-5.2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-5.3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-5.3-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm-ocr": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "glm4": {
+      "status": "mapped",
+      "tokenizer": "THUDM/glm-4-9b-chat"
+    },
+    "goliath": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gpt-oss": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "gpt-oss-safeguard": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "granite-code": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-8b-code-instruct"
+    },
+    "granite-embedding": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "granite3-dense": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.0-8b-instruct"
+    },
+    "granite3-guardian": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "granite3-moe": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.0-3b-a800m-instruct"
+    },
+    "granite3.1-dense": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.1-8b-instruct"
+    },
+    "granite3.1-moe": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.1-3b-a800m-instruct"
+    },
+    "granite3.2": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.2-8b-instruct"
+    },
+    "granite3.2-vision": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "granite3.3": {
+      "status": "mapped",
+      "tokenizer": "ibm-granite/granite-3.3-8b-instruct"
+    },
+    "granite4": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "granite4.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "granite4.1-guardian": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "granite4.2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "hermes3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "internlm2": {
+      "status": "mapped",
+      "tokenizer": "internlm/internlm2-chat-7b"
+    },
+    "kimi-k2.6": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "kimi-k2.7-code": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "kimi-k3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "laguna-s-2.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "laguna-xs-2.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "laguna-xs.2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "lfm2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "lfm2.5": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "lfm2.5-thinking": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama-guard3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama-pro": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama2": {
+      "status": "mapped",
+      "tokenizer": "NousResearch/Llama-2-7b-chat-hf"
+    },
+    "llama2-chinese": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama2-uncensored": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama3": {
+      "status": "mapped",
+      "tokenizer": "NousResearch/Meta-Llama-3-8B-Instruct"
+    },
+    "llama3-chatqa": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama3-gradient": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama3-groq-tool-use": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llama3.1": {
+      "status": "mapped",
+      "tokenizer": "NousResearch/Meta-Llama-3.1-8B-Instruct"
+    },
+    "llama3.2": {
+      "status": "mapped",
+      "tokenizer": "unsloth/Llama-3.2-3B-Instruct"
+    },
+    "llama3.2-vision": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "llama3.3": {
+      "status": "mapped",
+      "tokenizer": "unsloth/Llama-3.3-70B-Instruct"
+    },
+    "llama4": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "llava": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "llava-llama3": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "llava-phi3": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "magicoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "magistral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "marco-o1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mathstral": {
+      "status": "mapped",
+      "tokenizer": "mistralai/Mathstral-7B-v0.1"
+    },
+    "medgemma": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "medgemma1.5": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "meditron": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "medllama2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "megadolphin": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "minicpm-v": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "minicpm-v4.5": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "minicpm-v4.6": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "minimax-m2.7": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "minimax-m3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "ministral-3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral": {
+      "status": "mapped",
+      "tokenizer": "mistralai/Mistral-7B-Instruct-v0.3"
+    },
+    "mistral-large": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-large-3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-medium-3.5": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-nemo": {
+      "status": "mapped",
+      "tokenizer": "mistralai/Mistral-Nemo-Instruct-2407"
+    },
+    "mistral-openorca": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-small": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-small3.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-small3.2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistrallite": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mixtral": {
+      "status": "mapped",
+      "tokenizer": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    },
+    "moondream": {
+      "reason": "vision input requires model-specific image-token accounting",
+      "status": "unsupported"
+    },
+    "muse-glimmer": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mxbai-embed-large": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "nemotron": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-3-nano": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-3-super": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-3-ultra": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-3.5-lightning": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-cascade-2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-mini": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "neural-chat": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nexusraven": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nomic-embed-text": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "nomic-embed-text-v2-moe": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "north-mini-code-1.0": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "notus": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "notux": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nous-hermes": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nous-hermes2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nous-hermes2-mixtral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nuextract": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "olmo-3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "olmo-3.1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "olmo2": {
+      "status": "mapped",
+      "tokenizer": "allenai/OLMo-2-1124-7B-Instruct"
+    },
+    "open-orca-platypus2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "openchat": {
+      "status": "mapped",
+      "tokenizer": "openchat/openchat-3.5-0106"
+    },
+    "opencoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "openhermes": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "openthinker": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "orca-mini": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "orca2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "ornith": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "ornith-1.5": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "paraphrase-multilingual": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "phi": {
+      "status": "mapped",
+      "tokenizer": "microsoft/phi-2"
+    },
+    "phi3": {
+      "status": "mapped",
+      "tokenizer": "microsoft/Phi-3-mini-4k-instruct"
+    },
+    "phi3.5": {
+      "status": "mapped",
+      "tokenizer": "microsoft/Phi-3.5-mini-instruct"
+    },
+    "phi4": {
+      "status": "mapped",
+      "tokenizer": "microsoft/phi-4"
+    },
+    "phi4-mini": {
+      "status": "mapped",
+      "tokenizer": "microsoft/Phi-4-mini-instruct"
+    },
+    "phi4-mini-reasoning": {
+      "status": "mapped",
+      "tokenizer": "microsoft/Phi-4-mini-reasoning"
+    },
+    "phi4-reasoning": {
+      "status": "mapped",
+      "tokenizer": "microsoft/Phi-4-reasoning"
+    },
+    "phind-codellama": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen-7B-Chat"
+    },
+    "qwen2": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen2-7B-Instruct"
+    },
+    "qwen2-math": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen2-Math-7B-Instruct"
+    },
+    "qwen2.5": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen2.5-7B-Instruct"
+    },
+    "qwen2.5-coder": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+    },
+    "qwen2.5vl": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3": {
+      "status": "mapped",
+      "tokenizer": "Qwen/Qwen3-8B"
+    },
+    "qwen3-coder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3-coder-next": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3-embedding": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "qwen3-next": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3-vl": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3.5": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3.6": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3.8": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwen3.8-flash-next": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "qwq": {
+      "status": "mapped",
+      "tokenizer": "Qwen/QwQ-32B"
+    },
+    "r1-1776": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "reader-lm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "reflection": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "rnj-1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "sailor2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "samantha-mistral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "shieldgemma": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "smallthinker": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "smollm": {
+      "status": "mapped",
+      "tokenizer": "HuggingFaceTB/SmolLM-1.7B-Instruct"
+    },
+    "smollm2": {
+      "status": "mapped",
+      "tokenizer": "HuggingFaceTB/SmolLM2-1.7B-Instruct"
+    },
+    "snowflake-arctic-embed": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "snowflake-arctic-embed2": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "solar": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "solar-pro": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "sqlcoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "stable-beluga": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "stable-code": {
+      "status": "mapped",
+      "tokenizer": "stabilityai/stable-code-3b"
+    },
+    "stablelm-zephyr": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "stablelm2": {
+      "status": "mapped",
+      "tokenizer": "stabilityai/stablelm-2-zephyr-1_6b"
+    },
+    "starcoder": {
+      "status": "mapped",
+      "tokenizer": "bigcode/tiny_starcoder_py"
+    },
+    "starcoder2": {
+      "status": "mapped",
+      "tokenizer": "bigcode/starcoder2-7b"
+    },
+    "starling-lm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "tinydolphin": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "tinyllama": {
+      "status": "mapped",
+      "tokenizer": "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    },
+    "translategemma": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "tulu3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "vicuna": {
+      "status": "mapped",
+      "tokenizer": "lmsys/vicuna-7b-v1.5"
+    },
+    "wizard-math": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizard-vicuna": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizard-vicuna-uncensored": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizardcoder": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizardlm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizardlm-uncensored": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "wizardlm2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "xwinlm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "yarn-llama2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "yarn-mistral": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "yi": {
+      "status": "mapped",
+      "tokenizer": "01-ai/Yi-6B-Chat"
+    },
+    "yi-coder": {
+      "status": "mapped",
+      "tokenizer": "01-ai/Yi-Coder-9B-Chat"
+    },
+    "zephyr": {
+      "status": "mapped",
+      "tokenizer": "HuggingFaceH4/zephyr-7b-beta"
+    }
+  },
+  "schema_version": 1,
+  "source": "https://ollama.com/library"
+}

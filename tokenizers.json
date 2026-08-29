@@ -1,4 +1,5 @@
 {
+  "catalogue": "builtin",
   "model_tokenizers": {
     "qwen2.5-coder:1.5b": "Qwen/Qwen2.5-Coder-1.5B-Instruct"
   },

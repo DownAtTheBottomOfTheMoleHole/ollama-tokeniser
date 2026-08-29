@@ -45,6 +45,19 @@ ollama-tokeniser-cache = "ollama_tokeniser.proxy:cache_main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/ollama_tokeniser"]
 
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/scripts",
+  "/README.md",
+  "/LICENSE",
+  "/SECURITY.md",
+  "/CONTRIBUTING.md",
+  "/GitVersion.yml",
+  "/tokenizers.json",
+]
+
 [tool.pytest.ini_options]
 addopts = "-q"
 testpaths = ["tests"]

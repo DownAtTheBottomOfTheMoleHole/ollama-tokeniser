@@ -26,6 +26,7 @@ and forwards the fitted request to a locally running Ollama server.
     - [Installation](#installation)
     - [VS Code Chat](#vs-code-chat)
   - [Configuration](#configuration)
+  - [Built-in model catalogue](#built-in-model-catalogue)
   - [Python API](#python-api)
   - [Command-line usage](#command-line-usage)
   - [Testing](#testing)
@@ -113,8 +114,9 @@ ollama pull qwen2.5-coder:1.5b
 uv run ollama-tokeniser-cache --config tokenizers.json
 ```
 
-The cache command downloads the configured public tokenizer once. Proxy runtime
-then uses `local_files_only` mode.
+The cache command asks local Ollama which models are installed and downloads each
+matching public tokenizer once. Proxy runtime then uses `local_files_only` mode.
+No tokenizer is downloaded merely because it appears in the built-in catalogue.
 
 ### VS Code Chat
 
@@ -148,6 +150,7 @@ token budgets.
 
 | Setting | Default | Description |
 | --- | --- | --- |
+| `catalogue` | `builtin` | Use the packaged Ollama-library catalogue |
 | `model_tokenizers` | Qwen coder mapping | Exact Ollama model to Hugging Face tokenizer mappings |
 | `context_size` | `32768` | Total model context budget |
 | `reserve_tokens` | `4096` | Tokens reserved for generated output |
@@ -157,13 +160,41 @@ token budgets.
 
 <!-- markdownlint-enable MD013 -->
 
-Add another model only after identifying its exact original tokenizer. Then rerun:
+An exact entry in `model_tokenizers` overrides a family entry in the catalogue.
+Add an override only after identifying the model's exact original tokenizer.
+Then cache one model or every locally installed mapped model:
 
 ```bash
+uv run ollama-tokeniser-cache --config tokenizers.json --model qwen2.5-coder:7b
 uv run ollama-tokeniser-cache --config tokenizers.json
 ```
 
-Unmapped models are deliberately omitted from VS Code model discovery.
+`--all` exists for catalogue validation, but is not recommended for workstation
+setup because it downloads every distinct mapped tokenizer. Unmapped and
+explicitly unsupported models are deliberately omitted from VS Code discovery.
+
+## Built-in model catalogue
+
+The packaged catalogue is a snapshot of all **239 model families** listed in the
+official Ollama library on 29 August 2026. It currently contains 56 conservative
+family mappings and 183 explicit unsupported records. Any installed tag belonging
+to a mapped family works without a hand-written entry.
+
+An unsupported record is intentional: some families mix different base
+tokenizers across tags, some accept images whose token costs need separate
+accounting, some are embedding-only, and some do not yet have a confirmed public
+tokenizer source. The proxy never substitutes a merely similar tokenizer.
+
+A weekly GitHub workflow compares the official library with the snapshot and
+opens a GitHub Flow pull request when it changes. Maintainers must confirm exact
+tokenizer provenance before changing an unsupported record to `mapped`.
+
+Refresh the catalogue manually with:
+
+```bash
+python scripts/update_model_catalogue.py \
+  --output src/ollama_tokeniser/data/ollama-model-catalogue.json
+```
 
 ## Python API
 
@@ -259,6 +290,6 @@ Released under the [MIT Licence](LICENSE).
 [ci-link]: https://github.com/DownAtTheBottomOfTheMoleHole/ollama-tokeniser/actions/workflows/ci.yml
 [licence-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [licence-link]: LICENSE
-[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/datbmh_banner_v13.png
+[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/downatthebottomofthemolehole_banner_20.png
 [python-badge]: https://img.shields.io/badge/python-%3E%3D3.10-3776AB
 [python-link]: https://www.python.org/

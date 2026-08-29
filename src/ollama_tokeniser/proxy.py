@@ -7,12 +7,14 @@ import http.client
 import ipaddress
 import json
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
+from urllib.request import urlopen
 
+from .catalogue import load_catalogue, model_family, tokenizer_for_model
 from .chat import fit_chat_messages
 from .core import load_tokenizer, truncate_prompt
 
@@ -47,11 +49,7 @@ def filter_tag_payload(body: bytes, mappings: dict[str, str]) -> bytes:
     payload["models"] = [
         model
         for model in models
-        if str(model.get("name", model.get("model", ""))) in mappings
-        or (
-            ":" not in str(model.get("name", model.get("model", "")))
-            and f"{model.get('name', model.get('model', ''))}:latest" in mappings
-        )
+        if tokenizer_for_model(str(model.get("name", model.get("model", ""))), mappings)
     ]
     return json.dumps(payload, ensure_ascii=False).encode()
 
@@ -59,6 +57,7 @@ def filter_tag_payload(body: bytes, mappings: dict[str, str]) -> bytes:
 @dataclass(frozen=True, slots=True)
 class ProxyConfig:
     model_tokenizers: dict[str, str]
+    unsupported_models: dict[str, str] = field(default_factory=dict)
     context_size: int = 32768
     reserve_tokens: int = 4096
     template_tokens: int = 128
@@ -80,11 +79,22 @@ class ProxyConfig:
     @classmethod
     def from_file(cls, path: Path) -> ProxyConfig:
         raw = json.loads(path.read_text(encoding="utf-8"))
-        mappings = raw.get("model_tokenizers")
-        if not isinstance(mappings, dict) or not mappings:
-            raise ValueError("config must contain a non-empty model_tokenizers object")
+        mappings = raw.get("model_tokenizers", {})
+        if not isinstance(mappings, dict):
+            raise ValueError("model_tokenizers must be an object")
+        merged_mappings: dict[str, str] = {}
+        unsupported: dict[str, str] = {}
+        catalogue_reference = raw.get("catalogue")
+        if catalogue_reference:
+            catalogue = load_catalogue(str(catalogue_reference), path.parent)
+            merged_mappings.update(catalogue.tokenizers)
+            unsupported.update(catalogue.unsupported)
+        merged_mappings.update({str(key): str(value) for key, value in mappings.items()})
+        if not merged_mappings:
+            raise ValueError("config must enable a catalogue or contain model_tokenizers")
         return cls(
-            model_tokenizers={str(key): str(value) for key, value in mappings.items()},
+            model_tokenizers=merged_mappings,
+            unsupported_models=unsupported,
             context_size=int(raw.get("context_size", 32768)),
             reserve_tokens=int(raw.get("reserve_tokens", 4096)),
             template_tokens=int(raw.get("template_tokens", 128)),
@@ -106,11 +116,10 @@ class TokenizingProxy(ThreadingHTTPServer):
         self._tokenizers: dict[str, Any] = {}
 
     def tokenizer_for(self, model: str):
-        tokenizer_name = self.config.model_tokenizers.get(model)
-        if tokenizer_name is None and ":" not in model:
-            tokenizer_name = self.config.model_tokenizers.get(f"{model}:latest")
+        tokenizer_name = tokenizer_for_model(model, self.config.model_tokenizers)
         if tokenizer_name is None:
-            raise KeyError(model)
+            reason = self.config.unsupported_models.get(model_family(model))
+            raise KeyError(f"{model}: {reason}" if reason else model)
         if model in self._tokenizers:
             return self._tokenizers[model]
         LOG.info("loading tokenizer %s for %s", tokenizer_name, model)
@@ -308,10 +317,34 @@ def cache_main(argv: list[str] | None = None) -> int:
         description="Download configured tokenizer files for subsequent offline use."
     )
     parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--model", action="append", dest="models")
+    parser.add_argument("--all", action="store_true", help="Cache every mapped tokenizer")
+    parser.add_argument("--upstream", default="http://127.0.0.1:11434")
     args = parser.parse_args(argv)
     config = ProxyConfig.from_file(args.config)
-    for model, tokenizer_name in config.model_tokenizers.items():
-        print(f"Caching {tokenizer_name} for {model}...")
+    if args.models:
+        selected = [
+            (model, tokenizer_for_model(model, config.model_tokenizers)) for model in args.models
+        ]
+    elif args.all:
+        selected = list(config.model_tokenizers.items())
+    else:
+        with urlopen(f"{args.upstream.rstrip('/')}/api/tags", timeout=10) as response:
+            payload = json.load(response)
+        installed = [str(item.get("name", item.get("model", ""))) for item in payload["models"]]
+        selected = [
+            (model, tokenizer_for_model(model, config.model_tokenizers)) for model in installed
+        ]
+
+    missing = [model for model, tokenizer_name in selected if tokenizer_name is None]
+    if missing and args.models:
+        parser.error(f"no safe tokenizer mapping for: {', '.join(missing)}")
+    if missing:
+        print(f"Skipping installed models without safe mappings: {', '.join(missing)}")
+
+    unique = dict.fromkeys(str(tokenizer_name) for _, tokenizer_name in selected if tokenizer_name)
+    for tokenizer_name in unique:
+        print(f"Caching {tokenizer_name}...")
         load_tokenizer(tokenizer_name, local_files_only=False)
     print("Tokenizer cache is ready for offline proxy use.")
     return 0

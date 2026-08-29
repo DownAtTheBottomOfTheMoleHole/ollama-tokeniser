@@ -1,0 +1,45 @@
+name: Refresh Ollama catalogue
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    name: Refresh official library snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Update catalogue
+        run: >-
+          python scripts/update_model_catalogue.py
+          --output src/ollama_tokeniser/data/ollama-model-catalogue.json
+
+      - name: Open update pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPDATE_BRANCH: automation/ollama-catalogue-${{ github.run_id }}
+        run: |
+          if git diff --quiet; then
+            echo "The catalogue is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$UPDATE_BRANCH"
+          git add src/ollama_tokeniser/data/ollama-model-catalogue.json
+          git commit -m "chore(catalogue): refresh Ollama library snapshot"
+          git push origin "$UPDATE_BRANCH"
+          gh pr create \
+            --base main \
+            --head "$UPDATE_BRANCH" \
+            --title "chore(catalogue): refresh Ollama library snapshot" \
+            --body "Automated weekly refresh from the official Ollama library index."
+
