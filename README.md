@@ -290,6 +290,6 @@ Released under the [MIT Licence](LICENSE).
 [ci-link]: https://github.com/DownAtTheBottomOfTheMoleHole/ollama-tokeniser/actions/workflows/ci.yml
 [licence-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [licence-link]: LICENSE
-[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/downathtebottomofthemolehole-copilot-stonehenge-text-banner.png
+[org-banner]: https://raw.githubusercontent.com/DownAtTheBottomOfTheMoleHole/.github/main/assets/banners/repositories/ollama-tokeniser.png
 [python-badge]: https://img.shields.io/badge/python-%3E%3D3.10-3776AB
 [python-link]: https://www.python.org/
