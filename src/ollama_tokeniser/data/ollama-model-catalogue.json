@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29",
+  "generated_at": "2026-09-28",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -141,11 +141,11 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
-    "deepseek-v4-flash": {
+    "deepseek-v4-pro": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
-    "deepseek-v4-pro": {
+    "deepseek-v4.1-flash": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -246,10 +246,6 @@
       "status": "unsupported"
     },
     "glm-4.7-flash": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
-    "glm-5.1": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
