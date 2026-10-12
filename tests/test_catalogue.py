@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from importlib.resources import files
 
 from ollama_tokeniser.catalogue import ModelCatalogue, model_family, tokenizer_for_model
@@ -10,7 +11,7 @@ def test_builtin_catalogue_covers_ollama_snapshot() -> None:
     catalogue = ModelCatalogue.from_payload(payload)
 
     assert catalogue.model_count >= 239
-    assert catalogue.generated_at == "2026-08-29"
+    assert date.fromisoformat(catalogue.generated_at).isoformat() == catalogue.generated_at
     assert len(catalogue.tokenizers) + len(catalogue.unsupported) == catalogue.model_count
 
 

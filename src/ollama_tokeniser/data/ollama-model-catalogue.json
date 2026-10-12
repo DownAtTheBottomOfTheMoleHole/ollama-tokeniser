@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29",
+  "generated_at": "2026-10-05",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -35,6 +35,14 @@
     },
     "bge-m3": {
       "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "clef": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "clef-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
     "codebooga": {
@@ -141,11 +149,11 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
-    "deepseek-v4-flash": {
+    "deepseek-v4-pro": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
-    "deepseek-v4-pro": {
+    "deepseek-v4.1-flash": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -246,10 +254,6 @@
       "status": "unsupported"
     },
     "glm-4.7-flash": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
-    "glm-5.1": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -609,6 +613,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "nimble": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "nomic-embed-text": {
       "reason": "embedding routes are outside this chat and generate proxy",
       "status": "unsupported"
@@ -882,6 +890,10 @@
       "tokenizer": "bigcode/starcoder2-7b"
     },
     "starling-lm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "tev1": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
