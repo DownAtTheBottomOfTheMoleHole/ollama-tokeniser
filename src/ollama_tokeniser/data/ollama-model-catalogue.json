@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05",
+  "generated_at": "2026-10-12",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -201,6 +201,10 @@
       "reason": "embedding routes are outside this chat and generate proxy",
       "status": "unsupported"
     },
+    "embeddinggemma-2": {
+      "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
     "everythinglm": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -377,6 +381,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "laya": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "lfm2": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -526,6 +534,10 @@
       "status": "unsupported"
     },
     "mistral-large-3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "mistral-large-4": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
