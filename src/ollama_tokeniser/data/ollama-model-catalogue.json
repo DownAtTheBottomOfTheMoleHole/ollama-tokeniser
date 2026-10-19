@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12",
+  "generated_at": "2026-10-19",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -25,6 +25,10 @@
       "reason": "vision input requires model-specific image-token accounting",
       "status": "unsupported"
     },
+    "beam": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "bespoke-minicheck": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -35,6 +39,10 @@
     },
     "bge-m3": {
       "reason": "embedding routes are outside this chat and generate proxy",
+      "status": "unsupported"
+    },
+    "bonsai-2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
     "clef": {
@@ -98,6 +106,14 @@
       "status": "unsupported"
     },
     "command-r7b-arabic": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "d1": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "d1-omni": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -357,6 +373,10 @@
       "status": "mapped",
       "tokenizer": "internlm/internlm2-chat-7b"
     },
+    "kev": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "kimi-k2.6": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -581,6 +601,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "muse-spark-open": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "mxbai-embed-large": {
       "reason": "embedding routes are outside this chat and generate proxy",
       "status": "unsupported"
@@ -601,7 +625,15 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "nemotron-3.5-bolt": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "nemotron-3.5-lightning": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nemotron-3.5-super": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -626,6 +658,10 @@
       "status": "unsupported"
     },
     "nimble": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "nimble-v3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -746,6 +782,10 @@
       "tokenizer": "microsoft/Phi-4-reasoning"
     },
     "phind-codellama": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "pplx-decider": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -902,6 +942,10 @@
       "tokenizer": "bigcode/starcoder2-7b"
     },
     "starling-lm": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "strands-decider": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
