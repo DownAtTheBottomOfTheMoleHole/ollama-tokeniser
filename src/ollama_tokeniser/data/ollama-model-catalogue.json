@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19",
+  "generated_at": "2026-10-26",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -114,6 +114,10 @@
       "status": "unsupported"
     },
     "d1-omni": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "d3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -246,6 +250,10 @@
       "tokenizer": "tiiuae/Falcon3-7B-Instruct"
     },
     "firefunction-v2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "flint": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -541,6 +549,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "minimax-m3.1-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "ministral-3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -782,6 +794,10 @@
       "tokenizer": "microsoft/Phi-4-reasoning"
     },
     "phind-codellama": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "phonon": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
