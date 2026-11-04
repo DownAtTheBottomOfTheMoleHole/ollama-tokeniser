@@ -281,11 +281,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
         connection.request(self.command, route, body=body or None, headers=headers)
         response = connection.getresponse()
         filtered_body: bytes | None = None
-        if (
-            self.command == "GET"
-            and route == "/api/tags"
-            and response.status == 200
-        ):
+        if self.command == "GET" and route == "/api/tags" and response.status == 200:
             filtered_body = filter_tag_payload(response.read(), self.server.config.model_tokenizers)
         self.send_response(response.status, response.reason)
         for key, value in response.getheaders():
