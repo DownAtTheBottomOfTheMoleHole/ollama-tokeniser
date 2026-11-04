@@ -2,7 +2,14 @@ import json
 
 import pytest
 
-from ollama_tokeniser.proxy import ProxyConfig, filter_tag_payload, route_is_allowed
+from ollama_tokeniser.proxy import (
+    ProxyConfig,
+    filter_tag_payload,
+    route_is_allowed,
+    sanitise_log_text,
+    sanitise_response_header,
+    whitelisted_route_path,
+)
 
 
 def test_proxy_config_loads_model_mapping(tmp_path):
@@ -64,6 +71,27 @@ def test_required_vscode_routes_are_allowed():
     assert route_is_allowed("GET", "/api/tags") is True
     assert route_is_allowed("POST", "/api/show") is True
     assert route_is_allowed("POST", "/api/chat") is True
+
+
+def test_whitelisted_route_path_strips_query():
+    assert whitelisted_route_path("POST", "/api/chat?stream=true") == "/api/chat"
+
+
+def test_whitelisted_route_path_rejects_unknown_route():
+    with pytest.raises(ValueError, match="not allowed"):
+        whitelisted_route_path("POST", "/api/pull")
+
+
+def test_sanitise_log_text_escapes_newlines():
+    assert sanitise_log_text("line1\r\nline2\nline3") == "line1\\r\\nline2\\nline3"
+
+
+def test_sanitise_response_header_drops_invalid_name():
+    assert sanitise_response_header("X-Test\r\nInjected", "value") is None
+
+
+def test_sanitise_response_header_removes_newlines_from_value():
+    assert sanitise_response_header("X-Test", "ok\r\nInjected: bad") == ("X-Test", "okInjected: bad")
 
 
 def test_proxy_config_rejects_invalid_budget():
