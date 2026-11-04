@@ -19,6 +19,9 @@ from .chat import fit_chat_messages
 from .core import load_tokenizer, truncate_prompt
 
 LOG = logging.getLogger("ollama-tokeniser-proxy")
+HEADER_NAME_CHARS = frozenset(
+    "!#$%&'*+-.^_`|~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+)
 HOP_BY_HOP = {
     "connection",
     "keep-alive",
@@ -40,6 +43,34 @@ ALLOWED_ROUTES = {
 
 def route_is_allowed(method: str, path: str) -> bool:
     return (method, path.split("?", 1)[0]) in ALLOWED_ROUTES
+
+
+def whitelisted_route_path(method: str, path: str) -> str:
+    route = path.split("?", 1)[0]
+    if not route_is_allowed(method, route):
+        raise ValueError("Ollama API route is not allowed by this proxy")
+    for allowed_method, allowed_route in ALLOWED_ROUTES:
+        if allowed_method == method and allowed_route == route:
+            return allowed_route
+    raise ValueError("Ollama API route is not allowed by this proxy")
+
+
+def sanitise_log_text(value: str) -> str:
+    safe_text = value.replace("\r", "\\r").replace("\n", "\\n")
+    return "".join(
+        f"\\x{ord(char):02x}" if ord(char) < 0x20 or 0x7F <= ord(char) <= 0x9F else char
+        for char in safe_text
+    )
+
+
+def sanitise_response_header(name: str, value: str) -> tuple[str, str] | None:
+    if "\r" in name or "\n" in name:
+        return None
+    safe_name = name.replace("\r", "").replace("\n", "")
+    safe_value = value.replace("\r", "").replace("\n", "")
+    if not safe_name or any(char not in HEADER_NAME_CHARS for char in safe_name):
+        return None
+    return safe_name, safe_value
 
 
 def filter_tag_payload(body: bytes, mappings: dict[str, str]) -> bytes:
@@ -122,7 +153,11 @@ class TokenizingProxy(ThreadingHTTPServer):
             raise KeyError(f"{model}: {reason}" if reason else model)
         if model in self._tokenizers:
             return self._tokenizers[model]
-        LOG.info("loading tokenizer %s for %s", tokenizer_name, model)
+        LOG.info(
+            "loading tokenizer %s for %s",
+            sanitise_log_text(tokenizer_name),
+            sanitise_log_text(model),
+        )
         tokenizer = load_tokenizer(tokenizer_name, local_files_only=self.config.local_files_only)
         if len(self._tokenizers) >= 8:
             self._tokenizers.pop(next(iter(self._tokenizers)))
@@ -147,24 +182,24 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
     def _handle(self) -> None:
         try:
-            if not route_is_allowed(self.command, self.path):
-                self._json_error(403, "Ollama API route is not allowed by this proxy")
-                return
+            route = whitelisted_route_path(self.command, self.path)
             body = self._read_body()
             truncation: dict[str, Any] | None = None
-            if self.command == "POST" and self.path.split("?", 1)[0] in (
+            if self.command == "POST" and route in (
                 "/api/chat",
                 "/api/generate",
             ):
-                body, truncation = self._truncate(body)
-            self._forward(body, truncation)
+                body, truncation = self._truncate(body, route)
+            self._forward(route, body, truncation)
+        except ValueError as exc:
+            self._json_error(403 if str(exc).startswith("Ollama API route") else 400, str(exc))
         except KeyError as exc:
             self._json_error(
                 422,
                 f"no tokenizer mapping for Ollama model {exc.args[0]!r}; "
                 "add it to model_tokenizers in the proxy config",
             )
-        except (ValueError, json.JSONDecodeError) as exc:
+        except json.JSONDecodeError as exc:
             self._json_error(400, str(exc))
         except (OSError, http.client.HTTPException) as exc:
             LOG.exception("proxy request failed")
@@ -179,7 +214,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
             raise ValueError("request body exceeds 64 MiB")
         return self.rfile.read(length) if length else b""
 
-    def _truncate(self, body: bytes) -> tuple[bytes, dict[str, Any]]:
+    def _truncate(self, body: bytes, route: str) -> tuple[bytes, dict[str, Any]]:
         payload = json.loads(body)
         model = str(payload.get("model", ""))
         if not model:
@@ -191,7 +226,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
         if reserve_tokens < 0:
             reserve_tokens = self.server.config.reserve_tokens
 
-        if self.path.split("?", 1)[0] == "/api/chat":
+        if route == "/api/chat":
             result = fit_chat_messages(
                 payload.get("messages") or [],
                 tokenizer,
@@ -224,10 +259,15 @@ class ProxyHandler(BaseHTTPRequestHandler):
                 "kept_tokens": result.kept_tokens,
                 "removed_tokens": result.removed_tokens,
             }
-        LOG.info("%s %s token accounting: %s", self.path, model, details)
+        LOG.info(
+            "%s %s token accounting: %s",
+            sanitise_log_text(route),
+            sanitise_log_text(model),
+            details,
+        )
         return json.dumps(payload, ensure_ascii=False).encode(), details
 
-    def _forward(self, body: bytes, truncation: dict[str, Any] | None) -> None:
+    def _forward(self, route: str, body: bytes, truncation: dict[str, Any] | None) -> None:
         upstream = self.server.upstream
         connection_type = (
             http.client.HTTPSConnection
@@ -242,19 +282,20 @@ class ProxyHandler(BaseHTTPRequestHandler):
         }
         if body:
             headers["Content-Length"] = str(len(body))
-        connection.request(self.command, self.path, body=body or None, headers=headers)
+        connection.request(self.command, route, body=body or None, headers=headers)
         response = connection.getresponse()
         filtered_body: bytes | None = None
-        if (
-            self.command == "GET"
-            and self.path.split("?", 1)[0] == "/api/tags"
-            and response.status == 200
-        ):
+        if self.command == "GET" and route == "/api/tags" and response.status == 200:
             filtered_body = filter_tag_payload(response.read(), self.server.config.model_tokenizers)
         self.send_response(response.status, response.reason)
         for key, value in response.getheaders():
-            if key.lower() not in HOP_BY_HOP and key.lower() != "content-length":
-                self.send_header(key, value)
+            safe_header = sanitise_response_header(key, value)
+            if (
+                safe_header is not None
+                and safe_header[0].lower() not in HOP_BY_HOP
+                and safe_header[0].lower() != "content-length"
+            ):
+                self.send_header(*safe_header)
         if truncation is not None:
             self.send_header("X-Ollama-Tokeniser", "applied")
             self.send_header("X-Ollama-Tokeniser-Truncated", str(truncation["truncated"]).lower())
@@ -279,7 +320,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def log_message(self, fmt: str, *args: Any) -> None:
-        LOG.info("%s - %s", self.client_address[0], fmt % args)
+        LOG.info("%s - %s", self.client_address[0], sanitise_log_text(fmt % args))
 
 
 def main(argv: list[str] | None = None) -> int:
