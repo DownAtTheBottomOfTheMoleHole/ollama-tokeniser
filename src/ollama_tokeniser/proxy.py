@@ -56,7 +56,11 @@ def whitelisted_route_path(method: str, path: str) -> str:
 
 
 def sanitise_log_text(value: str) -> str:
-    return value.replace("\r", "\\r").replace("\n", "\\n")
+    safe_text = value.replace("\r", "\\r").replace("\n", "\\n")
+    return "".join(
+        f"\\x{ord(char):02x}" if ord(char) < 0x20 or 0x7F <= ord(char) <= 0x9F else char
+        for char in safe_text
+    )
 
 
 def sanitise_response_header(name: str, value: str) -> tuple[str, str] | None:
