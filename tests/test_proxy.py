@@ -88,6 +88,10 @@ def test_sanitise_log_text_escapes_newlines():
     assert sanitise_log_text("line1\r\nline2\nline3") == "line1\\r\\nline2\\nline3"
 
 
+def test_sanitise_log_text_escapes_c0_and_c1_controls():
+    assert sanitise_log_text("before\x1b[2J\x7f\x85after") == "before\\x1b[2J\\x7f\\x85after"
+
+
 def test_tokenizer_loading_log_sanitises_model_on_cache_miss(monkeypatch, caplog):
     model = "qwen2.5-coder:latest\nFORGED LOG ENTRY"
     tokenizer_name = "org/tokenizer\nFORGED TOKENIZER ENTRY"
