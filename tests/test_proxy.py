@@ -91,7 +91,10 @@ def test_sanitise_response_header_drops_invalid_name():
 
 
 def test_sanitise_response_header_removes_newlines_from_value():
-    assert sanitise_response_header("X-Test", "ok\r\nInjected: bad") == ("X-Test", "okInjected: bad")
+    assert sanitise_response_header("X-Test", "ok\r\nInjected: bad") == (
+        "X-Test",
+        "okInjected: bad",
+    )
 
 
 def test_proxy_config_rejects_invalid_budget():
