@@ -153,7 +153,11 @@ class TokenizingProxy(ThreadingHTTPServer):
             raise KeyError(f"{model}: {reason}" if reason else model)
         if model in self._tokenizers:
             return self._tokenizers[model]
-        LOG.info("loading tokenizer %s for %s", tokenizer_name, model)
+        LOG.info(
+            "loading tokenizer %s for %s",
+            sanitise_log_text(tokenizer_name),
+            sanitise_log_text(model),
+        )
         tokenizer = load_tokenizer(tokenizer_name, local_files_only=self.config.local_files_only)
         if len(self._tokenizers) >= 8:
             self._tokenizers.pop(next(iter(self._tokenizers)))

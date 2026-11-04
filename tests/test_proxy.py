@@ -1,9 +1,11 @@
 import json
+import logging
 
 import pytest
 
 from ollama_tokeniser.proxy import (
     ProxyConfig,
+    TokenizingProxy,
     filter_tag_payload,
     route_is_allowed,
     sanitise_log_text,
@@ -84,6 +86,25 @@ def test_whitelisted_route_path_rejects_unknown_route():
 
 def test_sanitise_log_text_escapes_newlines():
     assert sanitise_log_text("line1\r\nline2\nline3") == "line1\\r\\nline2\\nline3"
+
+
+def test_tokenizer_loading_log_sanitises_model_on_cache_miss(monkeypatch, caplog):
+    model = "qwen2.5-coder:latest\nFORGED LOG ENTRY"
+    tokenizer_name = "org/tokenizer\nFORGED TOKENIZER ENTRY"
+    config = ProxyConfig(model_tokenizers={"qwen2.5-coder": tokenizer_name})
+    monkeypatch.setattr("ollama_tokeniser.proxy.load_tokenizer", lambda *args, **kwargs: object())
+    server = TokenizingProxy(("127.0.0.1", 0), "http://127.0.0.1:11434", config)
+
+    try:
+        with caplog.at_level(logging.INFO, logger="ollama-tokeniser-proxy"):
+            server.tokenizer_for(model)
+    finally:
+        server.server_close()
+
+    assert "org/tokenizer\\nFORGED TOKENIZER ENTRY" in caplog.text
+    assert "qwen2.5-coder:latest\\nFORGED LOG ENTRY" in caplog.text
+    assert "\nFORGED LOG ENTRY" not in caplog.text
+    assert "\nFORGED TOKENIZER ENTRY" not in caplog.text
 
 
 def test_sanitise_response_header_drops_invalid_name():
