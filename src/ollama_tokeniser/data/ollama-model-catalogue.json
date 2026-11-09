@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02",
+  "generated_at": "2026-11-09",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -10,6 +10,10 @@
       "status": "unsupported"
     },
     "athene-v2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "autotrust-jev": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -397,6 +401,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "kimi-k3.1-pro": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "laguna-s-2.1": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -545,6 +553,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "mimo-v2.6": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "mimo-v2.6-flash": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -565,10 +577,6 @@
       "reason": "vision input requires model-specific image-token accounting",
       "status": "unsupported"
     },
-    "minimax-m2.7": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
     "minimax-m3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -586,10 +594,6 @@
       "tokenizer": "mistralai/Mistral-7B-Instruct-v0.3"
     },
     "mistral-large": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
-    "mistral-large-3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -826,6 +830,10 @@
       "status": "unsupported"
     },
     "pplx-decider": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "pplx-decider-flash": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
