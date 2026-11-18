@@ -33,12 +33,12 @@ jobs:
         run: python scripts/check_conventional_commits.py --base "$BASE_SHA" --head "$HEAD_SHA"
 
       - name: Set up GitVersion
-        uses: gittools/actions/gitversion/setup@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
+        uses: gittools/actions/gitversion/setup@389fe43e6b0189b98c40c43553070ac029304635 # v5.0.0
         with:
           versionSpec: "6.8.2"
 
       - name: Calculate GitVersion
-        uses: gittools/actions/gitversion/execute@7417b1089e2c7de93510f1901d656ddf60bb024f # v4.7.0
+        uses: gittools/actions/gitversion/execute@389fe43e6b0189b98c40c43553070ac029304635 # v5.0.0
         with:
           configFilePath: GitVersion.yml
 
