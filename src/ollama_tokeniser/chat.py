@@ -10,6 +10,8 @@ from typing import Any
 
 from .core import Strategy, Tokenizer
 
+MAX_CHAT_MESSAGES = 512
+
 
 @dataclass(frozen=True, slots=True)
 class ChatTruncationResult:
@@ -74,6 +76,8 @@ def fit_chat_messages(
     """
     if not messages:
         raise ValueError("messages cannot be empty")
+    if len(messages) > MAX_CHAT_MESSAGES:
+        raise ValueError(f"messages exceed maximum supported count of {MAX_CHAT_MESSAGES}")
     if context_size <= 0:
         raise ValueError("context_size must be greater than zero")
     if reserve_tokens < 0 or template_tokens < 0:
@@ -97,7 +101,7 @@ def fit_chat_messages(
             break
         removable_end = removable_start + 1
         while removable_end < len(fitted) - 1:
-            if fitted[removable_end].get("role") == "user":
+            if fitted[removable_end].get("role") in ("system", "user"):
                 break
             removable_end += 1
         dropped += removable_end - removable_start
@@ -106,11 +110,15 @@ def fit_chat_messages(
     kept_tokens = count_chat_tokens(fitted, tokenizer, tools=tools)
     if kept_tokens > max_input:
         target = next(
-            (index for index in range(len(fitted) - 1, -1, -1) if _text_content(fitted[index])),
+            (
+                index
+                for index in range(len(fitted) - 1, -1, -1)
+                if fitted[index].get("role") != "system" and _text_content(fitted[index])
+            ),
             None,
         )
         if target is None:
-            raise ValueError("non-text chat content exceeds the configured token budget")
+            raise ValueError("non-system text chat content exceeds the configured token budget")
         original_content = _text_content(fitted[target])
         content_ids = list(tokenizer.encode(original_content, add_special_tokens=False))
 

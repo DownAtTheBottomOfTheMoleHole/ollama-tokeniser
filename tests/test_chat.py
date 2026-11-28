@@ -1,3 +1,5 @@
+import pytest
+
 from ollama_tokeniser.chat import count_chat_tokens, fit_chat_messages
 
 
@@ -67,3 +69,47 @@ def test_chat_truncates_latest_message_at_token_boundary():
     assert result.messages[0]["content"].endswith("789")
     assert result.kept_tokens <= 25
     assert result.truncated is True
+
+
+def test_chat_preserves_intermediate_system_messages_when_dropping_old_turns():
+    messages = [
+        {"role": "user", "content": "old question"},
+        {"role": "assistant", "content": "old answer"},
+        {"role": "system", "content": "must keep"},
+        {"role": "user", "content": "new question"},
+    ]
+
+    result = fit_chat_messages(
+        messages,
+        CharacterChatTokenizer(),
+        context_size=58,
+        reserve_tokens=5,
+        template_tokens=0,
+    )
+
+    assert {"role": "system", "content": "must keep"} in result.messages
+
+
+def test_chat_does_not_truncate_system_message_as_fallback_target():
+    with pytest.raises(ValueError, match="non-system text"):
+        fit_chat_messages(
+            [
+                {"role": "system", "content": "0123456789"},
+                {"role": "assistant", "content": ""},
+            ],
+            CharacterChatTokenizer(),
+            context_size=20,
+            reserve_tokens=5,
+            template_tokens=0,
+        )
+
+
+def test_chat_rejects_excessive_message_count():
+    with pytest.raises(ValueError, match="maximum supported count"):
+        fit_chat_messages(
+            [{"role": "user", "content": "x"} for _ in range(513)],
+            CharacterChatTokenizer(),
+            context_size=512,
+            reserve_tokens=16,
+            template_tokens=0,
+        )
