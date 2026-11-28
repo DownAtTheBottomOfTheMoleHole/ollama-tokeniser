@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02",
+  "generated_at": "2026-11-23",
   "models": {
     "alfred": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
@@ -10,6 +10,10 @@
       "status": "unsupported"
     },
     "athene-v2": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "autotrust-jev": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -377,6 +381,18 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "hy4": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "inkling-2-mini": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "inkling-2-small": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "internlm2": {
       "status": "mapped",
       "tokenizer": "internlm/internlm2-chat-7b"
@@ -394,6 +410,10 @@
       "status": "unsupported"
     },
     "kimi-k3": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "kimi-k3.1-pro": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -545,6 +565,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "mimo-v2.6": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "mimo-v2.6-flash": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -565,10 +589,6 @@
       "reason": "vision input requires model-specific image-token accounting",
       "status": "unsupported"
     },
-    "minimax-m2.7": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
     "minimax-m3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
@@ -586,10 +606,6 @@
       "tokenizer": "mistralai/Mistral-7B-Instruct-v0.3"
     },
     "mistral-large": {
-      "reason": "exact public tokenizer mapping has not yet been confirmed",
-      "status": "unsupported"
-    },
-    "mistral-large-3": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
@@ -829,6 +845,10 @@
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
+    "pplx-decider-flash": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
     "qwen": {
       "status": "mapped",
       "tokenizer": "Qwen/Qwen-7B-Chat"
@@ -906,6 +926,10 @@
       "status": "unsupported"
     },
     "reflection": {
+      "reason": "exact public tokenizer mapping has not yet been confirmed",
+      "status": "unsupported"
+    },
+    "ripple-preview": {
       "reason": "exact public tokenizer mapping has not yet been confirmed",
       "status": "unsupported"
     },
