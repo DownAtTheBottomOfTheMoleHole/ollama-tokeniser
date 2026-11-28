@@ -1,12 +1,16 @@
 import json
 import logging
+from io import BytesIO
 
 import pytest
 
 from ollama_tokeniser.proxy import (
     ProxyConfig,
+    ProxyHandler,
     TokenizingProxy,
     filter_tag_payload,
+    host_header_is_loopback,
+    origin_header_is_loopback,
     route_is_allowed,
     sanitise_log_text,
     sanitise_response_header,
@@ -129,3 +133,38 @@ def test_proxy_config_rejects_invalid_budget():
             context_size=100,
             reserve_tokens=100,
         )
+
+
+@pytest.mark.parametrize(
+    ("value", "allowed"),
+    [
+        ("localhost:11435", True),
+        ("127.0.0.1:11435", True),
+        ("[::1]:11435", True),
+        ("example.com:11435", False),
+    ],
+)
+def test_host_header_must_target_loopback(value, allowed):
+    assert host_header_is_loopback(value) is allowed
+
+
+@pytest.mark.parametrize(
+    ("value", "allowed"),
+    [
+        ("http://localhost:11435", True),
+        ("https://127.0.0.1:11435", True),
+        ("https://example.com", False),
+        ("null", False),
+    ],
+)
+def test_origin_header_must_target_loopback(value, allowed):
+    assert origin_header_is_loopback(value) is allowed
+
+
+def test_read_body_rejects_negative_content_length():
+    handler = ProxyHandler.__new__(ProxyHandler)
+    handler.headers = {"Content-Length": "-1"}
+    handler.rfile = BytesIO(b"ignored")
+
+    with pytest.raises(ValueError, match="cannot be negative"):
+        handler._read_body()

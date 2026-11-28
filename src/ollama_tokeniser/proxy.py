@@ -39,6 +39,7 @@ ALLOWED_ROUTES = {
     ("POST", "/api/generate"),
     ("POST", "/api/show"),
 }
+MAX_REQUEST_BODY_BYTES = 64 * 1024 * 1024
 
 
 def route_is_allowed(method: str, path: str) -> bool:
@@ -71,6 +72,37 @@ def sanitise_response_header(name: str, value: str) -> tuple[str, str] | None:
     if not safe_name or any(char not in HEADER_NAME_CHARS for char in safe_name):
         return None
     return safe_name, safe_value
+
+
+def host_header_is_loopback(value: str) -> bool:
+    host = value.strip()
+    if not host:
+        return False
+    if host.startswith("["):
+        end = host.find("]")
+        if end < 0:
+            return False
+        host = host[1:end]
+    elif ":" in host:
+        host = host.rsplit(":", 1)[0]
+    if host.lower() == "localhost":
+        return True
+    try:
+        return ipaddress.ip_address(host).is_loopback
+    except ValueError:
+        return False
+
+
+def origin_header_is_loopback(value: str) -> bool:
+    parsed = urlsplit(value)
+    if parsed.scheme not in ("http", "https") or parsed.hostname is None:
+        return False
+    if parsed.hostname.lower() == "localhost":
+        return True
+    try:
+        return ipaddress.ip_address(parsed.hostname).is_loopback
+    except ValueError:
+        return False
 
 
 def filter_tag_payload(body: bytes, mappings: dict[str, str]) -> bytes:
@@ -182,6 +214,7 @@ class ProxyHandler(BaseHTTPRequestHandler):
 
     def _handle(self) -> None:
         try:
+            self._validate_request_origin()
             route = whitelisted_route_path(self.command, self.path)
             body = self._read_body()
             truncation: dict[str, Any] | None = None
@@ -208,9 +241,19 @@ class ProxyHandler(BaseHTTPRequestHandler):
             LOG.exception("tokenizer proxy failed")
             self._json_error(500, f"tokenizer proxy error: {exc}")
 
+    def _validate_request_origin(self) -> None:
+        host = self.headers.get("Host", "")
+        if host and not host_header_is_loopback(host):
+            raise ValueError("request Host header must target loopback")
+        origin = self.headers.get("Origin")
+        if origin and not origin_header_is_loopback(origin):
+            raise ValueError("request Origin header must target loopback")
+
     def _read_body(self) -> bytes:
         length = int(self.headers.get("Content-Length", "0"))
-        if length > 64 * 1024 * 1024:
+        if length < 0:
+            raise ValueError("Content-Length cannot be negative")
+        if length > MAX_REQUEST_BODY_BYTES:
             raise ValueError("request body exceeds 64 MiB")
         return self.rfile.read(length) if length else b""
 
